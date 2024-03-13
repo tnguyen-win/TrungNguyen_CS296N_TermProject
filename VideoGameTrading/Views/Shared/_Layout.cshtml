@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - VideoGameTrading</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/VideoGameTrading.styles.css" asp-append-version="true" />
+</head>
+<body class="bg-dark-subtle" data-bs-theme="dark">
+    @* Navbar *@
+    <header>
+        <nav class="navbar navbar-expand-lg border-bottom border-dark-subtle shadow-lg">
+            <div class="container">
+                <a class="navbar-brand text-light fw-bold" href="/">VideoGameTrading</a>
+                <button class="navbar-toggler border-dark-subtle" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        @* Home *@
+                        <li class="nav-item dropdown">
+                            <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Home
+                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu bg-dark border-dark-subtle rounded-0">
+                                @* Homepage *@
+                                <li>
+                                    <a class="dropdown-item text-body-secondary" href="/">Homepage</a>
+                                </li>
+                                @* Sitemap *@
+                                <li>
+                                    <a class="dropdown-item text-body-secondary border-top border-dark-subtle" href="/home/sitemap">SiteMap</a>
+                                </li>
+                                @* Privacy *@
+                                <li>
+                                    <a class="dropdown-item text-body-secondary border-top border-dark-subtle" href="/home/privacy">Privacy</a>
+                                </li>
+                            </ul>
+                        </li>
+                        @* Shop *@
+                        <li class="nav-item">
+                            <a class="nav-link text-body-secondary" href="/shop">Shop</a>
+                        </li>
+                        @* Cart *@
+                        <li class ="nav-item">
+                            <a class="nav-link text-body-secondary" href="/cart">Cart</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main role="main">@RenderBody()</main>
+    <footer class="d-flex align-items-center text-center text-body-tertiary border-top border-dark-subtle shadow-lg-hack-top p-4">
+        <div id="buttonScrollToTop" class="z-2 invisible d-flex flex-row-reverse fixed-bottom m-5">
+            <button class="btn btn-lg btn-warning rounded-0 border border-dark-subtle shadow-lg" onclick="scrollToTop();">
+                <svg class="my-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
+                </svg>
+            </button>
+        </div>
+        <div class="container">VideoGameTrading, &copy; 2023</div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

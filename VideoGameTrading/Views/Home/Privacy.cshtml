@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Home / Privacy";
+    ViewData["Link_privacy"] = "https://azure.microsoft.com/en-us/explore/trusted-cloud/privacy";
+}
+
+<div class="vh-100 container my-5">
+    <h6 class="display-6 fw-bold text-light mb-5">@ViewData["Title"]</h6>
+    <p class="text-body-secondary">
+        Online hosting disclaimer:
+        <ul>
+            <li>
+                <a class="text-warning link-warning" href=@ViewData["Link_privacy"]>@ViewData["Link_privacy"]</a>
+            </li>
+        </ul>
+    </p>
+</div>

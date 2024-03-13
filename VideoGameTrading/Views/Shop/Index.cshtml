@@ -1,0 +1,109 @@
+﻿@model List<Item>
+@{
+    ViewData["Title"] = "Shop / Homepage";
+}
+
+<form class="d-flex h-100" method="post">
+    <div class="overflow-auto border-end border-dark-subtle shadow-lg-hack-end" method="post">
+        @* GENRE *@
+        <div class="d-flex flex-column">
+            <p class="bg-light-subtle fw-bold shadow-lg mb-0 p-2">GENRE</p>
+            <div class="p-2">
+                <div class="input-group">
+                    <span class="input-group-text border-secondary-subtle">Type</span>
+                    <input class="form-control border-secondary-subtle" name="genre" placeholder='e.g. "Strategy"' />
+                </div>
+            </div>
+        </div>
+        @* RELEASE YEAR *@
+        <div class="d-flex flex-column">
+            <p class="bg-light-subtle fw-bold shadow-lg mb-0 p-2">RELEASE YEAR</p>
+            <div class="p-2">
+                <div class="input-group">
+                    <span class="input-group-text border-secondary-subtle">Min</span>
+                    <input class="form-control border-secondary-subtle" name="releaseYearMin" type="number" placeholder="1958" />
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text border-secondary-subtle">Max</span>
+                    <input class="form-control border-secondary-subtle" name="releaseYearMax" type="number" placeholder="2023" />
+                </div>
+            </div>
+        </div>
+        @* PRICE *@
+        <div class="d-flex flex-column">
+            <p class="bg-light-subtle fw-bold shadow-lg mb-0 p-2">PRICE</p>
+            <div class="p-2">
+                <div class="input-group">
+                    <span class="input-group-text border-secondary-subtle">Min</span>
+                    <input class="form-control border-secondary-subtle" name="priceMin" type="number" min="1" placeholder="$1" />
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text border-secondary-subtle">Max</span>
+                    <input class="form-control border-secondary-subtle" name="priceMax" type="number" max="100" placeholder="$100" />
+                </div>
+            </div>
+        </div>
+        @* AGE RANGE *@
+        <div class="d-flex flex-column">
+            <p class="bg-light-subtle fw-bold shadow-lg mb-0 p-2">AGE RATING</p>
+            <div class="p-2">
+                <div class="input-group">
+                    <span class="input-group-text border-secondary-subtle">Rating</span>
+                    <input class="form-control border-secondary-subtle" name="ageRange" placeholder='e.g. "Everyone"' />
+                </div>
+            </div>
+        </div>
+        @* CONDITION *@
+        <div class="d-flex flex-column">
+            <p class="bg-light-subtle fw-bold shadow-lg mb-0 p-2">CONDITION</p>
+            <div class="p-2">
+                <div class="input-group">
+                    <span class="input-group-text border-secondary-subtle">Physical</span>
+                    <input class="form-control border-secondary-subtle" name="condition" placeholder='e.g. "Excellent"' />
+                </div>
+            </div>
+        </div>
+        @* AUTHOR *@
+        <div class="d-flex flex-column">
+            <p class="bg-light-subtle fw-bold shadow-lg mb-0 p-2">OWNER</p>
+            <div class="p-2">
+                <div class="input-group">
+                    <span class="input-group-text border-secondary-subtle">Created by</span>
+                    <input class="form-control border-secondary-subtle" name="author" placeholder='e.g. "John Doe"' />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overflow-auto w-100 my-5">
+        <h6 class="display-6 fw-bold text-light container mb-5">@ViewData["Title"]</h6>
+        @* Search *@
+        <div class="d-flex flex-column align-items-center container mb-5">
+            <div class="d-flex flex-column gap-3 ms-auto">
+                <input class="btn btn-lg btn-secondary rounded-0 fw-bold" type="reset" value="RESET FILTERS">
+                <a class="btn btn-lg btn-warning rounded-0 text-dark fw-bold" href="/shop/create">CREATE PRODUCT</a>
+            </div>
+            <div id="search" class="input-group mt-5">
+                <input class="form-control border-secondary-subtle" name="search" type="search" placeholder="Search games by exact title..." />
+                <button class="input-group-text btn btn-lg btn-warning rounded-0 text-dark fw-bold" type="submit">SEARCH</button>
+            </div>
+        </div>
+        @* Products *@
+        <div class="row row-cols-1 row-cols-lg-3 g-4 container mt-5 mx-auto">
+            @if (@Model != null) {
+                @foreach (var item in Model) {
+                    <partial name="~/views/shop/card.cshtml" model="new Item {
+                        ItemId = item.ItemId,
+                        InCart = item.InCart,
+                        Title = item.Title,
+                        Genre = item.Genre,
+                        ReleaseYear = @item.ReleaseYear,
+                        Price =  @item.Price,
+                        AgeRange = @item.AgeRange,
+                        Condition = @item.Condition,
+                        From = @item.From
+                    }" />
+                }
+            }
+        </div>
+    </div>
+</form>

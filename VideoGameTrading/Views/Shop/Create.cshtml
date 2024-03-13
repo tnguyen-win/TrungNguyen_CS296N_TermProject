@@ -1,0 +1,76 @@
+﻿@model Item
+@{
+    ViewData["Title"] = "Shop / Create";
+}
+
+<div class="container my-5">
+    <h6 class="display-6 fw-bold text-light mb-5">@ViewData["Title"]</h6>
+    <form method="post">
+        @* InCart *@
+        <div>
+            <label class="fw-bold mb-3" for="inCart">Whether game is added to the virtual cart</label>
+            <div class="input-group">
+                <span class="input-group-text border-secondary-subtle">InCart</span>
+                <input id="inCart" class="form-control border-secondary-subtle" name="InCart" placeholder='e.g. "true" or "false"' />
+            </div>
+        </div>
+        @* Title *@
+        <div class="my-4">
+            <label class="fw-bold mb-3" for="title">Game title</label>
+            <div class="input-group">
+                <span class="input-group-text border-secondary-subtle">Title</span>
+                <input id="title" class="form-control border-secondary-subtle" name="Title" placeholder='e.g. "An exciting title"' />
+            </div>
+        </div>
+        @* Genre *@
+        <div class="my-4">
+            <label class="fw-bold mb-3" for="genre">Game genre</label>
+            <div class="input-group">
+                <span class="input-group-text border-secondary-subtle">Genre</span>
+                <input id="genre" class="form-control border-secondary-subtle" name="Genre" placeholder='e.g. "Strategy"' />
+            </div>
+        </div>
+        @* Release Year *@
+        <div class="mb-4">
+            <label class="fw-bold mb-3" for="releaseYear">Year the game was released</label>
+            <div class="input-group">
+                <span class="input-group-text border-secondary-subtle">Release Year</span>
+                <input id="releaseYear" class="form-control border-secondary-subtle" name="ReleaseYear" placeholder='e.g. "1958" - "2023"' />
+            </div>
+        </div>
+        @* Price *@
+        <div class="mb-4">
+            <label class="fw-bold mb-3" for="price">Assigned rent price for this game</label>
+            <div class="input-group">
+                <span class="input-group-text border-secondary-subtle">Price</span>
+                <input id="price" class="form-control border-secondary-subtle" name="Price" placeholder='e.g. "1" - "100"' />
+            </div>
+        </div>
+        @* Age Range *@
+        <div class="mb-4">
+            <label class="fw-bold mb-3" for="ageRange">Recommended age minimum for this game</label>
+            <div class="input-group">
+                <span class="input-group-text border-secondary-subtle">Age Range</span>
+                <input id="ageRange" class="form-control border-secondary-subtle" name="AgeRange" placeholder='e.g. "Everyone"' />
+            </div>
+        </div>
+        @* Condition *@
+        <div class="my-4">
+            <label class="fw-bold mb-3" for="condition">Physical condition of the game</label>
+            <div class="input-group">
+                <span class="input-group-text border-secondary-subtle">Condition</span>
+                <input id="condition" class="form-control border-secondary-subtle" name="Condition" placeholder='e.g. "Excellent"' />
+            </div>
+        </div>
+        @* Author *@
+        <div class="mb-4">
+            <label class="fw-bold mb-3" for="author">Current owner of the game</label>
+            <div class="input-group">
+                <span class="input-group-text border-secondary-subtle">Author</span>
+                <input id="author" class="form-control border-secondary-subtle" name="From.Name" placeholder='e.g. "John Doe"' />
+            </div>
+        </div>
+        @* Submit *@
+        <input class="btn btn-lg btn-warning rounded-0 text-dark fw-bold" type="submit" value="SUBMIT" />
+    </form>
+</div>

@@ -1,0 +1,11 @@
+﻿@model Item
+@if (@Model != null) {
+    ViewData["Title"] = $"Shop / Product / {@Model.ItemId}";
+
+    <div class="container my-5">
+        <h6 class="display-6 fw-bold text-light mb-5">@ViewData["Title"]</h6>
+        <partial name="~/views/shop/card.cshtml" model="@Model" />
+    </div>
+} else {
+    <partial name="~/views/shop/error.cshtml" />
+}

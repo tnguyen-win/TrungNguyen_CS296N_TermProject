@@ -1,0 +1,47 @@
+﻿@model List<Item>
+@{
+    ViewData["Title"] = "Cart / Homepage";
+    string products = "";
+    double subTotal = 0.0d;
+}
+
+<div class="container my-5">
+    <h6 class="display-6 fw-bold text-light mb-5">@ViewData["Title"]</h6>
+    @if (@Model != null) {
+        if (@Model.Count > 0) {
+            @* Products *@
+            <div class="row row-cols-1 row-cols-lg-3 g-4 container my-5">
+                @foreach (var item in Model) {
+                    products += $"Product {item.ItemId} - ${item.Price.ToString()}\n\n";
+                    products += item.Equals(Model.Last()) ? "====================" : "+\n\n";
+                    subTotal =  Math.Round(subTotal + item.Price, 2);
+
+                    <partial name="~/views/shop/card.cshtml" model="new Item {
+                        ItemId = item.ItemId,
+                        InCart = item.InCart,
+                        Title = item.Title,
+                        Genre = item.Genre,
+                        ReleaseYear = @item.ReleaseYear,
+                        Price =  @item.Price,
+                        AgeRange = @item.AgeRange,
+                        Condition = @item.Condition,
+                        From = @item.From
+                    }" />
+                }
+            </div>
+            @* Cart Calculations *@
+            <div class="d-flex flex-column">
+                <h6 class="display-6 fw-bold mb-5">Calculations</h6>
+                <p id="products">@products</p>
+                <big><big>Subtotal: <span class="fw-bold">$@subTotal</span></big></big>
+            </div>
+        } else {
+            <p class="text-body-secondary m-0 p-0">
+                There is nothing in your cart currently.
+                <ul>
+                    <li class="text-body-secondary">Set a product item's <span class="fw-bold text-light">InCart</span> property to a value of <span class="fw-bold text-light">true</span> to add it the cart.</li>
+                </ul>
+            </p>
+        }
+    }
+</div>
