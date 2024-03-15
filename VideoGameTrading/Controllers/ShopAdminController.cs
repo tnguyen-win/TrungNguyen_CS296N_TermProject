@@ -10,25 +10,60 @@ namespace VideoGameTrading.Controllers
     [Authorize(Roles = "Admin")]
     public class ShopAdminController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IShopRepository _repository1;
 
-        private readonly IShopRepository _repository;
+        private readonly IShopLengthRepository _repository2;
+
+        private readonly ICartLengthRepository _repository3;
+
+        private readonly AppDbContext _context;
 
         private readonly UserManager<AppUser> _userManager;
 
-        public ShopAdminController(AppDbContext context, IShopRepository repository, UserManager<AppUser> u)
+        public ShopAdminController(IShopRepository r1, IShopLengthRepository r2, ICartLengthRepository r3, AppDbContext context, UserManager<AppUser> u)
         {
+            _repository1 = r1;
+            _repository2 = r2;
+            _repository3 = r3;
             _context = context;
-            _repository = repository;
             _userManager = u;
         }
 
         // GET: ShopAdmin
-        public async Task<IActionResult> Index() => _context.Items != null ? View(await _context.Items.ToListAsync()) : Problem("Entity set 'AppDbContext.Items' is null.");
+        public async Task<IActionResult> Index()
+        {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
+            return _context.Items != null ? View(await _context.Items.ToListAsync()) : Problem("Entity set 'AppDbContext.Items' is null.");
+        }
 
         // GET: ShopAdmin/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             if (id == null || _context.Items == null) NotFound();
 
             var item = await _context.Items.FirstOrDefaultAsync(m => m.ItemId == id);
@@ -41,9 +76,22 @@ namespace VideoGameTrading.Controllers
         // GET: ShopAdmin/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             if (id == null || _context.Items == null) return NotFound();
 
-            var item = await _repository.GetItemByIdAsync(id.Value);
+            var item = await _repository1.GetItemByIdAsync(id.Value);
 
             if (item == null) return NotFound();
 
@@ -90,6 +138,19 @@ namespace VideoGameTrading.Controllers
         // GET: ShopAdmin/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             if (id == null || _context.Items == null) return NotFound();
 
             var item = await _context.Items.FirstOrDefaultAsync(m => m.ItemId == id);
@@ -106,7 +167,7 @@ namespace VideoGameTrading.Controllers
         {
             if (_context.Items == null) return Problem("Entity set 'AppDbContext.Items' is null.");
 
-            Item Item = _repository.GetItemByIdAsync(id).Result;
+            Item Item = _repository1.GetItemByIdAsync(id).Result;
 
             if (Item != null) _context.Items.Remove(Item);
 

@@ -12,6 +12,8 @@ var connectionString = builder.Configuration.GetConnectionString("MySqlConnectio
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 builder.Services.AddTransient<IShopRepository, ShopRepository>();
+builder.Services.AddTransient<IShopLengthRepository, ShopLengthRepository>();
+builder.Services.AddTransient<ICartLengthRepository, CartLengthRepository>();
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();

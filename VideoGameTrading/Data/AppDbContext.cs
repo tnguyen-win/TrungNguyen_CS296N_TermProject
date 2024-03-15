@@ -9,5 +9,9 @@ namespace VideoGameTrading.Data
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<Item>? Items { get; set; }
+
+        public DbSet<ShopLength>? ShopLength { get; set; }
+
+        public DbSet<CartLength>? CartLength { get; set; }
     }
 }

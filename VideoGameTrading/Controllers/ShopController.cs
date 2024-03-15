@@ -8,21 +8,43 @@ namespace VideoGameTrading.Controllers
 {
     public class ShopController : Controller
     {
-        readonly IShopRepository _repository;
+        readonly IShopRepository _repository1;
+
+        readonly IShopLengthRepository _repository2;
+
+        readonly ICartLengthRepository _repository3;
+
+        readonly AppDbContext _context;
 
         readonly UserManager<AppUser> _userManager;
 
-        public ShopController(IShopRepository r, UserManager<AppUser> u)
+        public ShopController(IShopRepository r1, IShopLengthRepository r2, ICartLengthRepository r3, AppDbContext context, UserManager<AppUser> u)
         {
-            _repository = r;
+            _repository1 = r1;
+            _repository2 = r2;
+            _repository3 = r3;
+            _context = context;
             _userManager = u;
         }
 
         // Homepage
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var items = _repository.GetItems();
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
+            var items = _repository1.GetItems();
 
             return View(items);
         }
@@ -30,7 +52,7 @@ namespace VideoGameTrading.Controllers
         [HttpPost]
         public IActionResult Index(string search, string genre, int releaseYearMin, int releaseYearMax, int priceMin, int priceMax, string ageRange, string condition, string author)
         {
-            List<Item> items = (from i in _repository.GetItems() select i).ToList();
+            List<Item> items = (from i in _repository1.GetItems() select i).ToList();
 
             var matchSearch = false;
             var matchGenre = false;
@@ -40,7 +62,7 @@ namespace VideoGameTrading.Controllers
             var matchCondition = false;
             var matchAuthor = false;
 
-            foreach (var i in _repository.GetItems())
+            foreach (var i in _repository1.GetItems())
             {
                 if (i.Title == search)
                 {
@@ -83,7 +105,7 @@ namespace VideoGameTrading.Controllers
 
             if (matchSearch)
             {
-                var ITEMS = (from i in _repository.GetItems()
+                var ITEMS = (from i in _repository1.GetItems()
                              where i.Title == search
                              select i).ToList();
 
@@ -94,7 +116,7 @@ namespace VideoGameTrading.Controllers
 
             if (matchGenre)
             {
-                var ITEMS = (from i in _repository.GetItems()
+                var ITEMS = (from i in _repository1.GetItems()
                              where i.Genre == genre
                              select i).ToList();
 
@@ -105,7 +127,7 @@ namespace VideoGameTrading.Controllers
 
             if (matchReleaseYear)
             {
-                var ITEMS = (from i in _repository.GetItems()
+                var ITEMS = (from i in _repository1.GetItems()
                              where i.ReleaseYear >= releaseYearMin & i.ReleaseYear <= releaseYearMax
                              select i).ToList();
 
@@ -116,7 +138,7 @@ namespace VideoGameTrading.Controllers
 
             if (matchPrice)
             {
-                var ITEMS = (from i in _repository.GetItems()
+                var ITEMS = (from i in _repository1.GetItems()
                              where i.Price >= priceMin & i.Price <= priceMax
                              select i).ToList();
 
@@ -127,7 +149,7 @@ namespace VideoGameTrading.Controllers
 
             if (matchAgeRange)
             {
-                var ITEMS = (from i in _repository.GetItems()
+                var ITEMS = (from i in _repository1.GetItems()
                              where i.AgeRange == ageRange
                              select i).ToList();
 
@@ -138,7 +160,7 @@ namespace VideoGameTrading.Controllers
 
             if (matchCondition)
             {
-                var ITEMS = (from i in _repository.GetItems()
+                var ITEMS = (from i in _repository1.GetItems()
                              where i.Condition == condition
                              select i).ToList();
 
@@ -149,7 +171,7 @@ namespace VideoGameTrading.Controllers
 
             if (matchAuthor)
             {
-                var ITEMS = (from i in _repository.GetItems()
+                var ITEMS = (from i in _repository1.GetItems()
                              where i.From.Name == author
                              select i).ToList();
 
@@ -162,7 +184,23 @@ namespace VideoGameTrading.Controllers
         // Create
 
         [Authorize]
-        public IActionResult Create() => View();
+        public async Task<IActionResult> Create()
+        {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
+            return View();
+        }
 
 
         [HttpPost]
@@ -183,7 +221,7 @@ namespace VideoGameTrading.Controllers
             // Originals
             model.ImageId = rnd.Next(1, 10);
 
-            await _repository.StoreItemAsync(model);
+            await _repository1.StoreItemAsync(model);
 
             return RedirectToAction("index", new { model.ItemId });
         }
@@ -191,9 +229,22 @@ namespace VideoGameTrading.Controllers
         // Delete
 
         [Authorize]
-        public IActionResult DeleteProduct(int itemId)
+        public async Task<IActionResult> DeleteProduct(int itemId)
         {
-            _repository.DeleteItem(itemId);
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
+            _repository1.DeleteItem(itemId);
 
             return RedirectToAction("Index");
         }

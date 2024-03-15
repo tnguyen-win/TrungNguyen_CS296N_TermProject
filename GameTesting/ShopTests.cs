@@ -3,11 +3,13 @@ using VideoGameTrading.Data;
 using VideoGameTrading.Models;
 
 namespace GameTesting {
-    public class GameTesting {
+    public class ShopTests {
         [Fact]
-        public void StoreItemTests() {
-            var repo = new FakeShopRepository();
-            var controller = new ShopController(repo, null!);
+        public void CreateItem() {
+            var repo1 = new FakeShopRepository();
+            var repo2 = new FakeShopLengthRepository();
+            var repo3 = new FakeCartLengthRepository();
+            var controller = new ShopController(repo1, repo2, repo3, null!, null!);
             var model = new Item() {
                 Title = "This is a test",
                 Genre = "This is a test",

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using VideoGameTrading.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using VideoGameTrading.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -8,18 +9,43 @@ namespace VideoGameTrading.Controllers
     [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
+        private readonly IShopRepository _repository1;
+
+        private readonly IShopLengthRepository _repository2;
+
+        private readonly ICartLengthRepository _repository3;
+
+        private readonly AppDbContext _context;
+
         private readonly UserManager<AppUser> _userManager;
 
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UserController(UserManager<AppUser> userMngr, RoleManager<IdentityRole> roleMngr)
+        public UserController(IShopRepository r1, IShopLengthRepository r2, ICartLengthRepository r3, AppDbContext context, UserManager<AppUser> userMngr, RoleManager<IdentityRole> roleMngr)
         {
+            _repository1 = r1;
+            _repository2 = r2;
+            _repository3 = r3;
+            _context = context;
             _userManager = userMngr;
             _roleManager = roleMngr;
         }
 
         public async Task<IActionResult> Index()
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             List<AppUser> users = new();
 
             foreach (AppUser user in _userManager.Users.ToList())
@@ -37,7 +63,23 @@ namespace VideoGameTrading.Controllers
             return View(model);
         }
 
-        public IActionResult Add() => View("../account/register");
+        public async Task<IActionResult> Add()
+        {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
+            return View("../account/register");
+        }
 
         [HttpPost]
         public async Task<IActionResult> Add(RegisterVM model)

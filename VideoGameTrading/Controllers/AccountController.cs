@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using VideoGameTrading.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using VideoGameTrading.Models;
 
@@ -6,17 +7,45 @@ namespace VideoGameTrading.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly IShopRepository _repository1;
+
+        private readonly IShopLengthRepository _repository2;
+
+        private readonly ICartLengthRepository _repository3;
+
+        private readonly AppDbContext _context;
+
         private readonly UserManager<AppUser> _userManager;
 
         private readonly SignInManager<AppUser> _signInManager;
 
-        public AccountController(UserManager<AppUser> userMngr, SignInManager<AppUser> signInMgr)
+        public AccountController(IShopRepository r1, IShopLengthRepository r2, ICartLengthRepository r3, AppDbContext context, UserManager<AppUser> userMngr, SignInManager<AppUser> signInMgr)
         {
+            _repository1 = r1;
+            _repository2 = r2;
+            _repository3 = r3;
+            _context = context;
             _userManager = userMngr;
             _signInManager = signInMgr;
         }
 
-        public IActionResult Register() => View();
+        public async Task<IActionResult> Register()
+        {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
+            return View();
+        }
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM model)
@@ -35,9 +64,21 @@ namespace VideoGameTrading.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public IActionResult Login(string returnURL = "")
+        public async Task<IActionResult> Login(string returnURL = "")
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             var model = new LoginVM { ReturnUrl = returnURL };
 
             return View(model);
@@ -66,6 +107,22 @@ namespace VideoGameTrading.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ViewResult AccessDenied() => View();
+        public async Task<IActionResult> AccessDenied()
+        {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
+            return View();
+        }
     }
 }

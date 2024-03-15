@@ -1,6 +1,7 @@
 using VideoGameTrading.Data;
 using VideoGameTrading.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace VideoGameTrading
 {
@@ -8,6 +9,28 @@ namespace VideoGameTrading
     {
         public static void Seed(AppDbContext context, IServiceProvider provider)
         {
+            // Shop Length
+
+            if (context.ShopLength != null && !context.ShopLength.Any())
+            {
+                var shoplength = new ShopLength { };
+
+                context.ShopLength.Add(shoplength);
+                context.SaveChanges();
+            }
+
+            // Cart Length
+
+            if (context.CartLength != null && !context.CartLength.Any())
+            {
+                var cartlength = new CartLength { };
+
+                context.CartLength.Add(cartlength);
+                context.SaveChanges();
+            }
+
+            // Items
+
             if (context.Items != null && !context.Items.Any())
             {
                 Random rnd1 = new();
@@ -35,7 +58,7 @@ namespace VideoGameTrading
                     var item1 = new Item
                     {
                         ImageId = 2,
-                        InCart = false,
+                        InCart = true,
                         Title = "A test title",
                         Genre = "Strategy",
                         ReleaseYear = 2001,
@@ -50,6 +73,7 @@ namespace VideoGameTrading
                     var item2 = new Item
                     {
                         ImageId = 7,
+                        InCart = false,
                         Title = "Another test title",
                         Genre = "RPG",
                         ReleaseYear = 2017,
@@ -60,6 +84,17 @@ namespace VideoGameTrading
                     };
 
                     context.Items.Add(item2);
+
+                    context.SaveChanges();
+
+                    var shoptotal = context.ShopLength.Find(1);
+                    var carttotal = context.CartLength.Find(1);
+
+                    shoptotal.ShopTotal = context.Items.Count();
+                    carttotal.CartTotal = context.Items
+                    .Where(m => m.InCart == true)
+                    .ToList().Count;
+
                     context.SaveChanges();
                 }
             }

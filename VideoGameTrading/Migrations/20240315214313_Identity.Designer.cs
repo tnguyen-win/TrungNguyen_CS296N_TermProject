@@ -11,7 +11,7 @@ using VideoGameTrading.Data;
 namespace VideoGameTrading.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240315065340_Identity")]
+    [Migration("20240315214313_Identity")]
     partial class Identity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -219,6 +219,20 @@ namespace VideoGameTrading.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("VideoGameTrading.Models.CartLength", b =>
+                {
+                    b.Property<int>("CartLengthId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CartTotal")
+                        .HasColumnType("int");
+
+                    b.HasKey("CartLengthId");
+
+                    b.ToTable("CartLength");
+                });
+
             modelBuilder.Entity("VideoGameTrading.Models.Item", b =>
                 {
                     b.Property<int>("ItemId")
@@ -257,6 +271,20 @@ namespace VideoGameTrading.Migrations
                     b.HasIndex("FromId");
 
                     b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("VideoGameTrading.Models.ShopLength", b =>
+                {
+                    b.Property<int>("ShopLengthId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ShopTotal")
+                        .HasColumnType("int");
+
+                    b.HasKey("ShopLengthId");
+
+                    b.ToTable("ShopLength");
                 });
 
             modelBuilder.Entity("VideoGameTrading.Models.AppUser", b =>
