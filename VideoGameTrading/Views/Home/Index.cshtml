@@ -1,8 +1,39 @@
 ﻿@{
-    ViewData["Title"] = "Home / Homepage";
+    ViewBag.Title = "Home / Homepage";
 }
 
-<div class="vh-100 container my-5">
-    <h6 class="display-6 fw-bold text-light mb-5">@ViewData["Title"]</h6>
-    <p class="text-body-secondary">Welcome. This is a site for people to rent video games.</p>
+<dialog
+    class="z-40 fixed bottom-0 hidden open:flex flex-col lg:flex-row items-center justify-center gap-3 lg:gap-0 lg:w-1/2 bg-[#191d20] text-[rgb(75%,75%,75%)] border-[1px] border-[rgb(25%,25%,25%)] shadow-2xl container mx-auto lg:mb-5 p-3"
+    open>
+    <form class="flex flex-col lg:flex-row gap-3" method="dialog">
+        <div class="flex">
+            <div class="my-auto">
+                This site uses analytics. Click
+            </div>
+            <partial name="~/views/shared/htmllink.cshtml"
+                model='new HtmlLinkVM { Type="dialog", URL="/home/privacy", Body="here" }' />
+            <div class="my-auto">
+                to learn more.
+            </div>
+        </div>
+        <button class="bg-yellow-400 hover:bg-yellow-300 text-black p-3">Dismiss</button>
+    </form>
+</dialog>
+<div class="z-0 relative flex grow items-center justify-center overflow-hidden text-white">
+    <div class="z-20 w-full h-full min-h-[calc(100vh-64px)] flex flex-col
+    bg-[radial-gradient(transparent,rgba(0,0,0,1))]">
+        <div class="z-20 w-full h-full min-h-[calc(100vh-64px)] flex flex-col
+        bg-[linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5))]">
+            <div class="flex flex-col gap-4 lg:gap-6 text-center m-auto">
+                <h1 class="font-black text-6xl lg:text-8xl">
+                    WELCOME
+                </h1>
+                <p class="text-sm lg:text-xl text-[rgb(75%,75%,75%)]">
+                    This is a site for people to rent video games.
+                </p>
+            </div>
+        </div>
+    </div>
+    <img class="absolute z-10 w-auto min-w-full min-h-full max-w-none saturate-50 contrast-125"
+        src="~/assets/games-2453777.jpg" />
 </div>

@@ -16,11 +16,9 @@ if %input% == 1 (
 )
 
 if %input% == 2 (
-    call mysql -u johnsmith -pSecret!123 -e "DROP SCHEMA IF EXISTS gameengines;"
+    call mysql -u johnsmith -pSecret!123 -e "DROP SCHEMA IF EXISTS gametrading;"
 
     call dotnet ef migrations remove
-
-    call dotnet ef migrations add InitialMySQL
 
     call dotnet ef migrations add Identity
 
@@ -42,7 +40,7 @@ if %input% == 8 (
 )
 
 if %input% == 10 (
-	call call git reset --soft HEAD~1
+	call git reset --soft HEAD~1
 )
 
 echo ----------------

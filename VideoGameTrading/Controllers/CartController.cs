@@ -2,14 +2,17 @@
 using VideoGameTrading.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace VideoGameTrading.Controllers {
-    public class CartController : Controller {
-        readonly IProductRepository repository;
+namespace VideoGameTrading.Controllers
+{
+    public class CartController : Controller
+    {
+        readonly IShopRepository repository;
 
-        public CartController(IProductRepository r) => repository = r;
+        public CartController(IShopRepository r) => repository = r;
 
         [HttpGet]
-        public IActionResult Index() {
+        public IActionResult Index()
+        {
             List<Item> items = (from m in repository.GetItems()
                                 where m.InCart == true
                                 select m).ToList();

@@ -1,0 +1,106 @@
+﻿@model Item
+
+@{
+    ViewData["Title"] = "ShopAdmin - Edit";
+}
+
+<div class="container m-auto lg:my-20 p-5">
+    <h1 class="text-4xl font-black mb-10">@ViewBag.Title</h1>
+    <div class="flex flex-col text-red-500 mt-3">
+        @Html.ValidationSummary(true)
+    </div>
+    <form asp-action="edit">
+        <input type="hidden" asp-for="ItemId" />
+        <input type="hidden" name="fromId" value="@Model.From.Id" />
+        @* ImageId *@
+        <div class="flex flex-col shadow-2xl mb-10">
+            <strong class="bg-[#353a40] shadow-2xl mb-0 p-2">Whether game is added to the virtual
+                cart</strong>
+            <div class="flex">
+                <span class="bg-[rgb(10%,10%,10%)] border-[1px] border-e-0 border-[rgb(25%,25%,25%)] p-3">ImageId</span>
+                <input id="imageid" class="w-full bg-inherit border-[1px] border-[rgb(25%,25%,25%)] p-3" type="number" asp-for="ImageId"
+                    name="ImageId" placeholder='e.g. "3"' />
+            </div>
+        </div>
+        @* InCart *@
+        <div class="flex flex-col shadow-2xl mb-10">
+            <strong class="bg-[#353a40] shadow-2xl mb-0 p-2">Whether game is added to the virtual
+                cart</strong>
+            <div class="flex">
+                <span class="bg-[rgb(10%,10%,10%)] border-[1px] border-e-0 border-[rgb(25%,25%,25%)] p-3">InCart</span>
+                <div class="w-full h-full border-[1px] border-[rgb(25%,25%,25%)]">
+                    <label class="w-full lg:w-max flex justify-center gap-3 bg-yellow-400 hover:bg-yellow-300 text-black select-none cursor-pointer p-3" asp-for="InCart">
+                        <input id="InCart" asp-for="InCart" name="InCart" type="checkbox" />
+                        Toggle In Cart
+                    </label>
+                </div>
+            </div>
+        </div>
+        @* Title *@
+        <div class="flex flex-col shadow-2xl mb-10">
+            <strong class="bg-[#353a40] shadow-2xl mb-0 p-2">Game title</strong>
+            <div class="flex">
+                <span class="bg-[rgb(10%,10%,10%)] border-[1px] border-e-0 border-[rgb(25%,25%,25%)] p-3">Title</span>
+                <input id="title" class="w-full bg-inherit border-[1px] border-[rgb(25%,25%,25%)] p-3" asp-for="Title"
+                    name="Title" placeholder='e.g. "Lorem ipsum"' />
+            </div>
+        </div>
+        @* Genre *@
+        <div class="flex flex-col shadow-2xl mb-10">
+            <strong class="bg-[#353a40] shadow-2xl mb-0 p-2">Game genre</strong>
+            <div class="flex">
+                <span class="bg-[rgb(10%,10%,10%)] border-[1px] border-e-0 border-[rgb(25%,25%,25%)] p-3">Genre</span>
+                <input id="genre" class="w-full bg-inherit border-[1px] border-[rgb(25%,25%,25%)] p-3" asp-for="Genre"
+                    name="Genre" placeholder='e.g. "Strategy"' />
+            </div>
+        </div>
+        @* ReleaseYear *@
+        <div class="flex flex-col shadow-2xl mb-10">
+            <strong class="bg-[#353a40] shadow-2xl mb-0 p-2">Year the game was released</strong>
+            <div class="flex">
+                <span class="bg-[rgb(10%,10%,10%)] border-[1px] border-e-0 border-[rgb(25%,25%,25%)] p-3">ReleaseYear</span>
+                <input id="releaseyear" class="w-full bg-inherit border-[1px] border-[rgb(25%,25%,25%)] p-3" type="number" asp-for="ReleaseYear"
+                    name="ReleaseYear" placeholder='e.g. "2024"' />
+            </div>
+        </div>
+        @* Price *@
+        <div class="flex flex-col shadow-2xl mb-10">
+            <strong class="bg-[#353a40] shadow-2xl mb-0 p-2">Assigned rent price for this game</strong>
+            <div class="flex">
+                <span class="bg-[rgb(10%,10%,10%)] border-[1px] border-e-0 border-[rgb(25%,25%,25%)] p-3">Price</span>
+                <input id="price" class="w-full bg-inherit border-[1px] border-[rgb(25%,25%,25%)] p-3" type="number" asp-for="Price"
+                    name="Price" placeholder='e.g. "12"' />
+            </div>
+        </div>
+        @* AgeRange *@
+        <div class="flex flex-col shadow-2xl mb-10">
+            <strong class="bg-[#353a40] shadow-2xl mb-0 p-2">Recommended age minimum for this game</strong>
+            <div class="flex">
+                <span class="bg-[rgb(10%,10%,10%)] border-[1px] border-e-0 border-[rgb(25%,25%,25%)] p-3">AgeRange</span>
+                <input id="agerange" class="w-full bg-inherit border-[1px] border-[rgb(25%,25%,25%)] p-3" asp-for="AgeRange"
+                    name="AgeRange" placeholder='e.g. "Everyone"' />
+            </div>
+        </div>
+        @* Condition *@
+        <div class="flex flex-col shadow-2xl mb-10">
+            <strong class="bg-[#353a40] shadow-2xl mb-0 p-2">Physical condition of the game</strong>
+            <div class="flex">
+                <span class="bg-[rgb(10%,10%,10%)] border-[1px] border-e-0 border-[rgb(25%,25%,25%)] p-3">Condition</span>
+                <input id="condition" class="w-full bg-inherit border-[1px] border-[rgb(25%,25%,25%)] p-3" asp-for="Condition"
+                    name="Condition" placeholder='e.g. "Excellent"' />
+            </div>
+        </div>
+        <div class="w-full flex flex-col lg:flex-row text-center lg:text-start gap-3">
+            <button class="w-full lg:w-max bg-yellow-400 hover:bg-yellow-300 text-center lg:text-start text-black p-3"
+                type="submit">Submit</button>
+            <partial name="~/views/shared/htmllink.cshtml"
+                model='new HtmlLinkVM { Type="account-2", URL="/shopadmin", Body="Back to List" }' />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

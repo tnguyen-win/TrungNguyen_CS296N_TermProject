@@ -1,5 +1,9 @@
-namespace VideoGameTrading.Models {
-    public class Item {
+namespace VideoGameTrading.Models
+{
+    public class Item
+    {
+        public int ImageId { get; set; }
+
         public int ItemId { get; set; }
 
         public bool InCart { get; set; }
