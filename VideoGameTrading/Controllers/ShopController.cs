@@ -50,8 +50,21 @@ namespace VideoGameTrading.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(string search, string genre, int releaseYearMin, int releaseYearMax, int priceMin, int priceMax, string ageRange, string condition, string author)
+        public async Task<IActionResult> Index(string search, string genre, int releaseYearMin, int releaseYearMax, int priceMin, int priceMax, string ageRange, string condition, string author)
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             List<Item> items = (from i in _repository1.GetItems() select i).ToList();
 
             var matchSearch = false;
@@ -94,7 +107,7 @@ namespace VideoGameTrading.Controllers
                     items.Clear();
                     matchCondition = true;
                 }
-                if (i.From.Name == author)
+                if (i.From != null && i.From.Name == author)
                 {
                     items.Clear();
                     matchAuthor = true;
@@ -172,7 +185,7 @@ namespace VideoGameTrading.Controllers
             if (matchAuthor)
             {
                 var ITEMS = (from i in _repository1.GetItems()
-                             where i.From.Name == author
+                             where i.From != null && i.From.Name == author
                              select i).ToList();
 
                 foreach (var I in ITEMS) items.Add(I);
@@ -207,6 +220,19 @@ namespace VideoGameTrading.Controllers
         [Authorize]
         public async Task<IActionResult> Create(Item model)
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             Random rnd = new();
 
             // Fallbacks

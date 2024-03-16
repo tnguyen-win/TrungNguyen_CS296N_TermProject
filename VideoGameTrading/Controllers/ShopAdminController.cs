@@ -105,6 +105,19 @@ namespace VideoGameTrading.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, string fromId, [Bind("ImageId,ItemId,InCart,Title,Genre,ReleaseYear,Price,AgeRange,Condition")] Item item)
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             if (id != item.ItemId) return NotFound();
 
             var from = await _userManager.FindByIdAsync(fromId);
@@ -165,6 +178,19 @@ namespace VideoGameTrading.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             if (_context.Items == null) return Problem("Entity set 'AppDbContext.Items' is null.");
 
             Item Item = _repository1.GetItemByIdAsync(id).Result;

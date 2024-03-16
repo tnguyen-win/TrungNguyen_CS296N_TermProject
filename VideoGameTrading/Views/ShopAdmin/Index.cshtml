@@ -7,43 +7,43 @@
 <div class="container m-auto lg:my-20 p-5">
     <h1 class="text-4xl font-black mb-10">@ViewBag.Title</h1>
     <div class="relative overflow-x-auto mb-5">
-        <table class="text-center border-collapse border-[1px] border-[rgb(25%,25%,25%)] shadow-2xl mb-5">
+        <table class="text-center border-collapse border-[1px] border-[rgb(22.5%,22.5%,22.5%)] shadow-2xl mb-5">
             <thead class="bg-[rgb(10%,10%,10%)]">
                 <tr>
-                    <th class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                    <th class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                         @Html.DisplayNameFor(model => model.ImageId)
                     </th>
-                    <th class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                    <th class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                         @Html.DisplayNameFor(model => model.ItemId)
                     </th>
-                    <th class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                    <th class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                         @Html.DisplayNameFor(model => model.InCart)
                     </th>
-                    <th class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                    <th class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                         @Html.DisplayNameFor(model => model.Title)
                     </th>
-                    <th class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                    <th class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                         @Html.DisplayNameFor(model => model.Genre)
                     </th>
-                    <th class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                    <th class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                         @Html.DisplayNameFor(model => model.ReleaseYear)
                     </th>
-                    <th class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                    <th class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                         @Html.DisplayNameFor(model => model.Price)
                     </th>
-                    <th class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                    <th class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                         @Html.DisplayNameFor(model => model.AgeRange)
                     </th>
-                    <th class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                    <th class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                         @Html.DisplayNameFor(model => model.Condition)
                     </th>
-                    <th class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                    <th class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                         📄
                     </th>
-                    <th class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                    <th class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                         🛠️
                     </th>
-                    <th class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                    <th class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                         ❌
                     </th>
                 </tr>
@@ -52,42 +52,42 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                        <td class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                             @Html.DisplayFor(modelItem => item.ImageId)
                         </td>
-                        <td class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                        <td class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                             @Html.DisplayFor(modelItem => item.ItemId)
                         </td>
-                        <td class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                        <td class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                             @Html.DisplayFor(modelItem => item.InCart)
                         </td>
-                        <td class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                        <td class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                             @Html.DisplayFor(modelItem => item.Title)
                         </td>
-                        <td class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                        <td class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                             @Html.DisplayFor(modelItem => item.Genre)
                         </td>
-                        <td class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                        <td class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                             @Html.DisplayFor(modelItem => item.ReleaseYear)
                         </td>
-                        <td class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                        <td class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                             @Html.DisplayFor(modelItem => item.Price)
                         </td>
-                        <td class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                        <td class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                             @Html.DisplayFor(modelItem => item.AgeRange)
                         </td>
-                        <td class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                        <td class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                             @Html.DisplayFor(modelItem => item.Condition)
                         </td>
-                        <td class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                        <td class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                             <partial name="~/views/shared/htmllink.cshtml"
                                 model='new HtmlLinkVM { Type="shop-1", URL=$"/shopadmin/details/{@item.ItemId}", Body="Details" }' />
                         </td>
-                        <td class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                        <td class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                             <partial name="~/views/shared/htmllink.cshtml"
                                 model='new HtmlLinkVM { Type="shop-1", URL=$"/shopadmin/edit/{@item.ItemId}", Body="Edit" }' />
                         </td>
-                        <td class="border-[1px] border-[rgb(25%,25%,25%)] p-3">
+                        <td class="border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3">
                             <partial name="~/views/shared/htmllink.cshtml"
                                 model='new HtmlLinkVM { Type="shop-1", URL=$"/shopadmin/delete/{@item.ItemId}", Body="Delete" }' />
                         </td>

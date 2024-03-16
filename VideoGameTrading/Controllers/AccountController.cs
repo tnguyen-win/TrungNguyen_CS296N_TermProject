@@ -50,6 +50,19 @@ namespace VideoGameTrading.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterVM model)
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             if (ModelState.IsValid)
             {
                 var user = new AppUser { UserName = model.Username, Name = model.Name };
@@ -87,6 +100,19 @@ namespace VideoGameTrading.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM model)
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             if (ModelState.IsValid)
             {
                 var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, isPersistent: model.RememberMe, lockoutOnFailure: false);
@@ -102,6 +128,19 @@ namespace VideoGameTrading.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             await _signInManager.SignOutAsync();
 
             return RedirectToAction("Index", "Home");

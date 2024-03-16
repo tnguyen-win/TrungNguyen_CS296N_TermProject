@@ -84,6 +84,19 @@ namespace VideoGameTrading.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(RegisterVM model)
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             if (ModelState.IsValid)
             {
                 var user = new AppUser { UserName = model.Username };
@@ -99,6 +112,19 @@ namespace VideoGameTrading.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             AppUser user = await _userManager.FindByIdAsync(id);
 
             if (user != null)
@@ -121,6 +147,19 @@ namespace VideoGameTrading.Controllers
         [HttpPost]
         public async Task<IActionResult> AddToAdmin(string id)
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             IdentityRole adminRole = await _roleManager.FindByNameAsync("Admin");
 
             if (adminRole == null) TempData["message"] = "Admin role doesn't exist. Click 'Add Admin Role' button to create it.";
@@ -137,6 +176,19 @@ namespace VideoGameTrading.Controllers
         [HttpPost]
         public async Task<IActionResult> RemoveFromAdmin(string id)
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             AppUser user = await _userManager.FindByIdAsync(id);
 
             var result = await _userManager.RemoveFromRoleAsync(user, "Admin");
@@ -149,6 +201,19 @@ namespace VideoGameTrading.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateAdminRole()
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             var result = await _roleManager.CreateAsync(new IdentityRole("Admin"));
 
             if (result.Succeeded) { }
@@ -159,6 +224,19 @@ namespace VideoGameTrading.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteRole(string id)
         {
+            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
+            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
+
+            shoplength.ShopTotal = _repository1.GetItems().Count;
+            cartlength.CartTotal = _repository1.GetItems()
+            .Where(m => m.InCart == true)
+            .ToList().Count;
+
+            _context.SaveChanges();
+
+            ViewBag.ShopLength = shoplength.ShopTotal;
+            ViewBag.CartLength = cartlength.CartTotal;
+
             IdentityRole role = await _roleManager.FindByIdAsync(id);
 
             var result = await _roleManager.DeleteAsync(role);
