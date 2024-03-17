@@ -1,6 +1,7 @@
 ﻿using VideoGameTrading.Data;
 using VideoGameTrading.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VideoGameTrading.Controllers
 {
@@ -22,6 +23,7 @@ namespace VideoGameTrading.Controllers
             _context = context;
         }
 
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);

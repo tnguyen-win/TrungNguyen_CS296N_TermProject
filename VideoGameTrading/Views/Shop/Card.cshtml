@@ -1,7 +1,6 @@
 ﻿<li>
-    <div
-        class="h-full flex flex-col rounded-[1rem] bg-[#212429] border-[1px] border-[rgb(22.5%,22.5%,22.5%)] shadow-2xl">
-        <div class="flex flex-col rounded-t-[1rem] border-b-[1px] border-[rgb(22.5%,22.5%,22.5%)]">
+    <div class="h-full flex flex-col rounded-[1rem] bg-black border-[1px] border-[rgb(20%,20%,20%)] shadow-2xl">
+        <div class="flex flex-col rounded-t-[1rem] border-b-[1px] border-[rgb(20%,20%,20%)]">
             <partial name="~/views/shared/htmllink.cshtml"
                 model='new HtmlLinkVM { Type="product-1", URL=$"/assets/{Model.ImageId}.png", Body="ABC" }' />
             <div class="bg-[#353a40] text-center p-3">
@@ -10,7 +9,7 @@
             <div class="flex flex-col text-[rgb(75%,75%,75%)] p-5">
                 <small>
                     <div class="flex">
-                        <div>
+                        <div class="mt-auto">
                             <span class="font-black text-white">ID:</span> @Model.ItemId
                         </div>
                         <partial name="~/views/shared/htmllink.cshtml"
@@ -42,7 +41,7 @@
                 </small>
                 <div class="flex mt-5">
                     <partial name="~/views/shared/htmllink.cshtml"
-                        model='new HtmlLinkVM { Type="produc-2", URL=$"/shopadmin/details/{@Model.ItemId}", Body="View Post" }' />
+                        model='new HtmlLinkVM { Type="produc-2", URL=$"/shopadmin/details/{@Model.ItemId}", Body="View Details" }' />
                     <partial name="~/views/shared/htmllink.cshtml"
                         model='new HtmlLinkVM { Type="product-3", URL=$"/shop/deleteproduct?itemId={@Model.ItemId}" }' />
                 </div>

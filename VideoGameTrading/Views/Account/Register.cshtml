@@ -16,10 +16,9 @@
         @* Name *@
         <div class="shadow-2xl mb-3">
             <div class="flex">
-                <span
-                    class="bg-[rgb(10%,10%,10%)] border-[1px] border-e-0 border-[rgb(22.5%,22.5%,22.5%)] p-3">Name</span>
+                <span class="bg-[rgb(5%,5%,5%)] border-[1px] border-e-0 border-[rgb(20%,20%,20%)] p-3">Name</span>
                 <input id="eRegisterName" for="name"
-                    class="w-full bg-inherit border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3" name="name"
+                    class="w-full bg-inherit border-[1px] border-[rgb(20%,20%,20%)] p-3" name="name"
                     placeholder="Enter a name" />
             </div>
             <small class="text-red-500" for="name">
@@ -29,10 +28,9 @@
         @* Username *@
         <div class="shadow-2xl mb-3">
             <div class="flex">
-                <span
-                    class="bg-[rgb(10%,10%,10%)] border-[1px] border-e-0 border-[rgb(22.5%,22.5%,22.5%)] p-3">Username</span>
+                <span class="bg-[rgb(5%,5%,5%)] border-[1px] border-e-0 border-[rgb(20%,20%,20%)] p-3">Username</span>
                 <input id="eRegisterUsername" for="username"
-                    class="w-full bg-inherit border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3" name="username"
+                    class="w-full bg-inherit border-[1px] border-[rgb(20%,20%,20%)] p-3" name="username"
                     placeholder="Enter a username" />
             </div>
             <small class="text-red-500" for="username">
@@ -42,9 +40,8 @@
         @* Password *@
         <div class="shadow-2xl mb-3">
             <div class="flex">
-                <span
-                    class="bg-[rgb(10%,10%,10%)] border-[1px] border-e-0 border-[rgb(22.5%,22.5%,22.5%)] p-3">Password</span>
-                <input for="password" class="w-full bg-inherit border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3"
+                <span class="bg-[rgb(5%,5%,5%)] border-[1px] border-e-0 border-[rgb(20%,20%,20%)] p-3">Password</span>
+                <input for="password" class="w-full bg-inherit border-[1px] border-[rgb(20%,20%,20%)] p-3"
                     name="password" type="password" placeholder="Enter a password" />
             </div>
             <small class="text-red-500" for="password">
@@ -55,8 +52,8 @@
         <div class="shadow-2xl mb-5">
             <div class="flex">
                 <span
-                    class="bg-[rgb(10%,10%,10%)] border-[1px] border-e-0 border-[rgb(22.5%,22.5%,22.5%)] p-3">Confirm<br />Password</span>
-                <input for="confirmpassword" class="w-full bg-inherit border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3"
+                    class="bg-[rgb(5%,5%,5%)] border-[1px] border-e-0 border-[rgb(20%,20%,20%)] p-3">Confirm<br />Password</span>
+                <input for="confirmpassword" class="w-full bg-inherit border-[1px] border-[rgb(20%,20%,20%)] p-3"
                     name="confirmpassword" type="password" placeholder="Re-enter the password" />
             </div>
             <small class="text-red-500" for="confirmpassword">
@@ -65,7 +62,7 @@
         </div>
         <div class="flex flex-col items-center gap-3">
             <div class="w-full flex flex-col lg:flex-row text-center lg:text-start gap-3">
-                <button class="bg-yellow-400 hover:bg-yellow-300 text-black p-3" type="submit"
+                <button class="bg-white hover:bg-[rgb(230,230,230)] text-black p-3" type="submit"
                     onclick="storeFormValues();">Submit</button>
                 <partial name="~/views/shared/htmllink.cshtml"
                     model='new HtmlLinkVM { Type="account-2", URL="/", Body="Cancel" }' />

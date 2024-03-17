@@ -289,13 +289,8 @@ namespace VideoGameTrading.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<int>("AppUserId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("varchar(60)");
+                        .HasColumnType("longtext");
 
                     b.HasDiscriminator().HasValue("AppUser");
                 });

@@ -16,9 +16,8 @@
         @* Username *@
         <div class="shadow-2xl mb-3">
             <div class="flex">
-                <span
-                    class="bg-[rgb(10%,10%,10%)] border-[1px] border-e-0 border-[rgb(22.5%,22.5%,22.5%)] p-3">Username</span>
-                <input for="username" class="w-full bg-inherit border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3"
+                <span class="bg-[rgb(5%,5%,5%)] border-[1px] border-e-0 border-[rgb(20%,20%,20%)] p-3">Username</span>
+                <input for="username" class="w-full bg-inherit border-[1px] border-[rgb(20%,20%,20%)] p-3"
                     name="username" placeholder="Enter user's username" value="@Model.Username" />
             </div>
             <small class="text-red-500" for="username">
@@ -28,9 +27,8 @@
         @* Password *@
         <div class="shadow-2xl mb-5">
             <div class="flex">
-                <span
-                    class="bg-[rgb(10%,10%,10%)] border-[1px] border-e-0 border-[rgb(22.5%,22.5%,22.5%)] p-3">Password</span>
-                <input for="password" class="w-full bg-inherit border-[1px] border-[rgb(22.5%,22.5%,22.5%)] p-3"
+                <span class="bg-[rgb(5%,5%,5%)] border-[1px] border-e-0 border-[rgb(20%,20%,20%)] p-3">Password</span>
+                <input for="password" class="w-full bg-inherit border-[1px] border-[rgb(20%,20%,20%)] p-3"
                     name="password" type="password" placeholder="Enter user's password" />
             </div>
             <small class="text-red-500" for="password">
@@ -40,7 +38,7 @@
         @* Remember Me *@
         <div class="shadow-2xl mb-5">
             <label
-                class="w-full lg:w-max flex justify-center gap-3 bg-yellow-400 hover:bg-yellow-300 text-black select-none cursor-pointer p-3"
+                class="w-full lg:w-max flex justify-center gap-3 bg-white hover:bg-[rgb(230,230,230)] text-black select-none cursor-pointer p-3"
                 for="remember">
                 <input id="remember" for="remember" type="checkbox" />
                 Remember Me
@@ -48,7 +46,7 @@
         </div>
         <div class="flex flex-col items-center gap-3">
             <div class="w-full flex flex-col lg:flex-row text-center lg:text-start gap-3">
-                <button class="bg-yellow-400 hover:bg-yellow-300 text-black p-3" type="submit">Submit</button>
+                <button class="bg-white hover:bg-[rgb(230,230,230)] text-black p-3" type="submit">Submit</button>
                 <partial name="~/views/shared/htmllink.cshtml"
                     model='new HtmlLinkVM { Type="account-2", URL="/", Body="Cancel" }' />
             </div>

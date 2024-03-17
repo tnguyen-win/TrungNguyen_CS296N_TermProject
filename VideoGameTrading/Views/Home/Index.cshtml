@@ -3,7 +3,7 @@
 }
 
 <dialog
-    class="z-40 fixed bottom-0 hidden open:flex flex-col lg:flex-row items-center justify-center gap-3 lg:gap-0 lg:w-1/2 bg-[#191d20] text-[rgb(75%,75%,75%)] border-[1px] border-[rgb(22.5%,22.5%,22.5%)] shadow-2xl container mx-auto lg:mb-5 p-3"
+    class="z-40 fixed bottom-0 hidden open:flex flex-col lg:flex-row items-center justify-center gap-3 lg:gap-0 lg:w-1/2 bg-[rgb(5%,5%,5%)] text-[rgb(75%,75%,75%)] border-[1px] border-[rgb(20%,20%,20%)] shadow-2xl container mx-auto lg:mb-5 p-3"
     open>
     <form class="flex flex-col lg:flex-row gap-3" method="dialog">
         <div class="flex">
@@ -16,7 +16,7 @@
                 to learn more.
             </div>
         </div>
-        <button class="bg-yellow-400 hover:bg-yellow-300 text-black p-3">Dismiss</button>
+        <button class="bg-white hover:bg-[rgb(230,230,230)] text-black p-3">Dismiss</button>
     </form>
 </dialog>
 <div class="z-0 relative flex grow items-center justify-center overflow-hidden text-white">
@@ -28,12 +28,56 @@
                 <h1 class="font-black text-6xl lg:text-8xl">
                     WELCOME
                 </h1>
-                <p class="text-sm lg:text-xl text-[rgb(75%,75%,75%)]">
+                <p class="text-sm lg:text-xl">
                     This is a site for people to rent video games.
                 </p>
+                <ul class="grid grid-cols-2 lg:grid-cols-4 gap-5 w-full mx-auto">
+                    <partial name="~/views/shared/htmlradio.cshtml"
+                        model='new HtmlRadioVM { Id=1, Body="Image [v1]", Checked=false }' />
+                    <partial name="~/views/shared/htmlradio.cshtml"
+                        model='new HtmlRadioVM { Id=2, Body="Image [v2]", Checked=false }' />
+                    <partial name="~/views/shared/htmlradio.cshtml"
+                        model='new HtmlRadioVM { Id=3, Body="Image [v3]", Checked=false }' />
+                    <partial name="~/views/shared/htmlradio.cshtml"
+                        model='new HtmlRadioVM { Id=4, Body="Image [v4]", Checked=false }' />
+                    <partial name="~/views/shared/htmlradio.cshtml"
+                        model='new HtmlRadioVM { Id=5, Body="Image [v5]", Checked=false }' />
+                    <partial name="~/views/shared/htmlradio.cshtml"
+                        model='new HtmlRadioVM { Id=6, Body="Video [v6]", Checked=true }' />
+                    <partial name="~/views/shared/htmlradio.cshtml"
+                        model='new HtmlRadioVM { Id=7, Body="Video [v7]", Checked=false }' />
+                    <partial name="~/views/shared/htmlradio.cshtml"
+                        model='new HtmlRadioVM { Id=8, Body="Video [v8]", Checked=false }' />
+                    <partial name="~/views/shared/htmlradio.cshtml"
+                        model='new HtmlRadioVM { Id=9, Body="Video [v9]", Checked=false }' />
+                </ul>
             </div>
         </div>
     </div>
-    <img class="absolute z-10 w-auto min-w-full min-h-full max-w-none saturate-50 contrast-125"
+    <img id="1" class="eAssets hidden absolute z-10 w-full h-full object-cover saturate-50 contrast-125"
+        src="~/assets/17520.png" />
+    <img id="2" class="eAssets hidden absolute z-10 w-full h-full object-cover saturate-50 contrast-125"
+        src="~/assets/doom-16_hd.png" />
+    <img id="3" class="eAssets hidden absolute z-10 w-full h-full object-cover saturate-50 contrast-125"
+        src="~/assets/s8bjx5gtrkcpCWi3GUcdic.png" />
+    <img id="4" class="eAssets hidden absolute z-10 w-full h-full object-cover saturate-50 contrast-125"
         src="~/assets/games-2453777.jpg" />
+    <img id="5" class="eAssets hidden absolute z-10 w-full h-full object-cover saturate-50 contrast-125"
+        src="~/assets/star-wars-baby-yoda-2_bGhuaG2UmZqaraWkpJRobWllrWdma2U.jpg" />
+    <video id="6" class="eAssets hidden absolute z-10 w-full h-full object-cover saturate-50 contrast-125"
+        src="~/assets/Color.mp4" playsInline autoPlay muted loop>
+        This browser doesn&apos;t support MP4. Try using a different browser.
+    </video>
+    <video id="7" class="eAssets hidden absolute z-10 w-full h-full object-cover saturate-50 contrast-125"
+        src="~/assets/Clouds_1.mp4" playsInline autoPlay autoPlay muted loop>
+        This browser doesn&apos;t support MP4. Try using a different browser.
+    </video>
+    <video id="8" class="eAssets hidden absolute z-10 w-full h-full object-cover saturate-50 contrast-125"
+        src="~/assets/Embers.mp4" playsInline autoPlay muted loop>
+        This browser doesn&apos;t support MP4. Try using a different browser.
+    </video>
+    <video id="9" class="eAssets hidden absolute z-10 w-full h-full object-cover saturate-50 contrast-125"
+        src="~/assets/Matrix.mp4" playsInline autoPlay muted loop>
+        This browser doesn&apos;t support MP4. Try using a different browser.
+    </video>
 </div>
