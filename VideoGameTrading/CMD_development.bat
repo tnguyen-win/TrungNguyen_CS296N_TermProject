@@ -34,9 +34,9 @@ if %input% == 4 (
 )
 
 if %input% == 8 (
-    call mysql -u aa4c8e_engines -pSecret!123 -h MYSQL5048.site4now.net -P 3306 -e "DROP SCHEMA IF EXISTS db_aa4c8e_engines;"
+    call mysql -u aa4c8e_trading -pSecret!123 -h MYSQL5045.site4now.net -P 3306 -e "DROP SCHEMA IF EXISTS db_aa4c8e_trading;"
 
-    call dotnet ef database update --connection "server=MYSQL5048.site4now.net;port=3306;user=aa4c8e_engines;password=Secret!123;database=db_aa4c8e_engines;"
+    call dotnet ef database update --connection "server=MYSQL5045.site4now.net;port=3306;user=aa4c8e_trading;password=Secret!123;database=db_aa4c8e_trading;"
 )
 
 if %input% == 10 (

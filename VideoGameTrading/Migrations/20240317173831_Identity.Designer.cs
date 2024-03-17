@@ -11,7 +11,7 @@ using VideoGameTrading.Data;
 namespace VideoGameTrading.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240317031808_Identity")]
+    [Migration("20240317173831_Identity")]
     partial class Identity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
