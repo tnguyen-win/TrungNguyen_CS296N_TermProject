@@ -1,74 +1,252 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - VideoGameTrading</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/VideoGameTrading.styles.css" asp-append-version="true" />
+    <title>@ViewBag.Title - VideoGameTrading</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* Prevent flickering on page switching */
+            background-color: black;
+            color: white;
+            font-family: 'Inter';
+        }
+
+        .shadow-hack {
+            /* Flip vertical direction	*/
+            --tw-shadow: 0 -25px 50px -12px rgb(0 0 0 / 0.25);
+            --tw-shadow-colored: 0 25px 50px -12px var(--tw-shadow-color);
+            --tw-ring-offset-shadow: 0 0 #0000;
+            --tw-ring-shadow: 0 0 #0000;
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+        }
+    </style>
+    <script src="~/lib/tailwindcss/tailwindcss_341.js"></script>
+    </script>
 </head>
-<body class="bg-dark-subtle" data-bs-theme="dark">
+
+<body class="bg-black text-white">
     @* Navbar *@
-    <header>
-        <nav class="navbar navbar-expand-lg border-bottom border-dark-subtle shadow-lg">
-            <div class="container">
-                <a class="navbar-brand text-light fw-bold" href="/">VideoGameTrading</a>
-                <button class="navbar-toggler border-dark-subtle" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        @* Home *@
-                        <li class="nav-item dropdown">
-                            <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                Home
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z" />
+    <header class="z-[60] sticky top-0 start-0 bg-inherit text-[rgb(75%,75%,75%)] shadow-2xl">
+        <nav id="eMobileBorder" class="lg:border-b-[1px] border-[rgb(20%,20%,20%)]">
+            <nav id="eMobileBorder">
+                <div class="lg:h-16 flex flex-col lg:flex-row lg:container lg:mx-auto">
+                    @* Navbar - Left *@
+                    <div class="flex flex-col lg:flex-row lg:me-auto">
+                        <div class="h-16 flex items-center border-b-[1px] border-[rgb(20%,20%,20%)]
+                        lg:border-0">
+                            <partial name="~/views/shared/htmllink.cshtml"
+                                model='new HtmlLinkVM { Type="brand", URL="/", Body="VideoGameTrading" }' />
+                            <button id="eMobileButton" class="lg:hidden h-full flex items-center ms-auto p-6"
+                                type="button" onclick="toggleMobile();">
+                                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512"
+                                    height="16px" width="16px" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0
+                            96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7
+                            0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32
+                            32-32H416c17.7 0 32 14.3 32 32z">
+                                    </path>
+                                </svg>
+                                <svg class="hidden" stroke="currentColor" fill="currentColor" stroke-width="0"
+                                    viewBox="0 0 384 512" height="16px" width="16px" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M376.6 84.5c11.3-13.6 9.5-33.8-4.1-45.1s-33.8-9.5-45.1 4.1L192 206 56.6 43.5C45.3 29.9 25.1 28.1 11.5 39.4S-3.9 70.9 7.4 84.5L150.3 256 7.4 427.5c-11.3 13.6-9.5 33.8 4.1 45.1s33.8 9.5 45.1-4.1L192 306 327.4 468.5c11.3 13.6 31.5 15.4 45.1 4.1s15.4-31.5 4.1-45.1L233.7 256 376.6 84.5z">
+                                    </path>
                                 </svg>
                             </button>
-                            <ul class="dropdown-menu bg-dark border-dark-subtle rounded-0">
-                                @* Homepage *@
-                                <li>
-                                    <a class="dropdown-item text-body-secondary" href="/">Homepage</a>
-                                </li>
-                                @* Sitemap *@
-                                <li>
-                                    <a class="dropdown-item text-body-secondary border-top border-dark-subtle" href="/home/sitemap">SiteMap</a>
-                                </li>
-                                @* Privacy *@
-                                <li>
-                                    <a class="dropdown-item text-body-secondary border-top border-dark-subtle" href="/home/privacy">Privacy</a>
-                                </li>
-                            </ul>
-                        </li>
-                        @* Shop *@
-                        <li class="nav-item">
-                            <a class="nav-link text-body-secondary" href="/shop">Shop</a>
-                        </li>
-                        @* Cart *@
-                        <li class ="nav-item">
-                            <a class="nav-link text-body-secondary" href="/cart">Cart</a>
-                        </li>
-                    </ul>
+                        </div>
+                        <div class="eMobiles hidden lg:flex flex-col lg:flex-row">
+                            <div class="group relative flex flex-col lg:flex-row items-start lg:items-center text-sm lg:focus-within:text-white lg:hover:text-white"
+                                href="#">
+                                <button class="hidden w-full lg:flex p-6 lg:px-4">
+                                    Home
+                                    <svg class="hidden lg:block ms-2" stroke="currentColor" fill="currentColor"
+                                        stroke-width="0" viewBox="0 0 16 16" height="16px" width="16px"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z">
+                                        </path>
+                                    </svg>
+                                </button>
+                                <ul
+                                    class="eMobiles hidden lg:group-focus-within:block lg:group-focus-within:hidden lg:group-hover:block lg:absolute lg:top-full w-full lg:w-[200%] lg:start-[-50%] lg:bg-black text-[rgb(75%,75%,75%)] lg:shadow-2xl">
+                                    <li>
+                                        <partial name="~/views/shared/htmllink.cshtml"
+                                            model='new HtmlLinkVM { Type="dropdown", URL="/", Body="Homepage" }' />
+                                    </li>
+                                    <li>
+                                        <partial name="~/views/shared/htmllink.cshtml"
+                                            model='new HtmlLinkVM { Type="dropdown", URL="/home/sitemap", Body="Sitemap" }' />
+                                    </li>
+                                    <li>
+                                        <partial name="~/views/shared/htmllink.cshtml"
+                                            model='new HtmlLinkVM { Type="dropdown", URL="/home/privacy", Body="Privacy" }' />
+                                    </li>
+                                </ul>
+                            </div>
+                            <partial name="~/views/shared/htmllink.cshtml"
+                                model='new HtmlLinkVM { Type="navlink", URL="/shop", Body="Shop" }' />
+                            @if (ViewBag.ShopLength != 0)
+                            {
+                                <partial name="~/views/shared/htmlindicator.cshtml"
+                                    model='new HtmlLinkVM { Body=$"{ViewBag.ShopLength}" }' />
+                            }
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <partial name="~/views/shared/htmllink.cshtml"
+                                    model='new HtmlLinkVM { Type="navlink", URL="/shopadmin", Body="Scaffolding" }' />
+                            }
+                            @if (User.Identity != null && User.Identity.IsAuthenticated)
+                            {
+                                <partial name="~/views/shared/htmllink.cshtml"
+                                    model='new HtmlLinkVM { Type="navlink", URL="/cart", Body="Cart" }' />
+                                @if (ViewBag.CartLength != 0)
+                                {
+                                    <partial name="~/views/shared/htmlindicator.cshtml"
+                                        model='new HtmlLinkVM { Body=$"{ViewBag.CartLength}" }' />
+                                }
+                            }
+                            </small>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <partial name="~/views/shared/htmllink.cshtml"
+                                    model='new HtmlLinkVM { Type="navlink", URL="/user", Body="Admin" }' />
+                            }
+                        </div>
+                    </div>
+                    @* Navbar - Right *@
+                    <div class="flex lg:flex flex-col lg:flex-row flex-col-reverse">
+                        <div class="eMobiles hidden lg:flex flex-col lg:flex-row justify-center gap-3">
+                            @if (User.Identity != null && User.Identity.IsAuthenticated)
+                            {
+                                <form class="flex items-center justify-center gap-5" action="/account/logout" method="post">
+                                    <div>Welcome back ( <span class="text-green-400">@User.Identity.Name</span> )</div>
+                                    <button class="flex items-center justify-center text-sm bg-white hover:bg-[rgb(230,230,230)] text-black
+                            p-6 lg:px-4" type="submit">Logout</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <partial name="~/views/shared/htmllink.cshtml"
+                                    model='new HtmlLinkVM { Type="navlink", URL="/account/register", Body="Register" }' />
+                                <partial name="~/views/shared/htmllink.cshtml"
+                                    model='new HtmlLinkVM { Type="navlink", URL="/account/login", Body="Login" }' />
+                            }
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
     </header>
+    <div class='eMobiles z-50 hidden fixed start-0 left-0 w-screen h-screen bg-[rgba(0,0,0,.75)]'
+        onclick="toggleMobile();"></div>
+    @* Body *@
     <main role="main">@RenderBody()</main>
-    <footer class="d-flex align-items-center text-center text-body-tertiary border-top border-dark-subtle shadow-lg-hack-top p-4">
-        <div id="buttonScrollToTop" class="z-2 invisible d-flex flex-row-reverse fixed-bottom m-5">
-            <button class="btn btn-lg btn-warning rounded-0 border border-dark-subtle shadow-lg" onclick="scrollToTop();">
-                <svg class="my-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
-                </svg>
-            </button>
+    @* Footer *@
+    <footer class="text-[rgb(50%,50%,50%)] border-t-[1px] border-[rgb(20%,20%,20%)] shadow-hack p-5 pb-96">
+        <div class="container mx-auto flex flex-row items-center justify-center">
+            &copy; 2023-2024 VideoGameTrading -
+            <span class="ms-1">
+                <partial name="~/views/shared/htmllink.cshtml"
+                    model='new HtmlLinkVM { Type="footer", URL="/home/privacy", Body="Privacy" }' />
+            </span>
         </div>
-        <div class="container">VideoGameTrading, &copy; 2023</div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    @* Scroll To Top *@
+    <div id="buttonScrollToTop" class="z-10 invisible fixed bottom-0 right-0 m-5">
+        <button class="bg-white hover:bg-[rgb(230,230,230)] text-black shadow-2xl p-3" onclick="scrollToTop();">
+            <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="16px"
+                width="16px" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                    d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z">
+                </path>
+            </svg>
+        </button>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        // https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+
+        const eMobiles = document.getElementsByClassName('eMobiles');
+        const eMobileBorder = document.getElementById('eMobileBorder');
+        const eMobileButton = document.getElementById('eMobileButton');
+        const eRadios = document.getElementsByClassName('eRadios');
+        const eAssets = document.getElementsByClassName('eAssets');
+        const eRegisterName = document.getElementById('eRegisterName')
+        const eRegisterUsername = document.getElementById('eRegisterUsername')
+        const sRegisterName = sessionStorage.getItem('register-name');
+        const sRegisterUsername = sessionStorage.getItem('register-username');
+        const eBtn = document.getElementById('buttonScrollToTop');
+
+        function toggleMobile() {
+            Array.from(eMobiles).forEach(e => e.classList.contains('hidden') ? (eMobileBorder.classList.add('border-b-[1px]'), e.classList.remove('hidden'), (eMobileButton.children[0].classList.add('hidden'), eMobileButton.children[1].classList.remove('hidden'))) : (e.classList.add('hidden'), (eMobileBorder.classList.remove('border-b-[1px]'), eMobileButton.children[0].classList.remove('hidden'), eMobileButton.children[1].classList.add('hidden'))));
+        }
+
+        function resetMobile() {
+            Array.from(eMobiles).forEach(e => window.matchMedia('(min-width: 1024px)') ? (eMobileBorder.classList.remove('border-b-[1px]'), e.classList.add('hidden'), eMobileButton.children[0].classList.remove('hidden'), eMobileButton.children[1].classList.add('hidden')) : {});
+        }
+
+        function checkSelectOptions() {
+            Array.from(eAssets).forEach(e => {
+                e.classList.add('hidden');
+                e.nodeName === 'VIDEO' ? e.currentTime = 0.0 : {};
+            });
+
+            Array.from(eRadios).forEach(e => {
+                let eAsset = document.getElementById(e.id.split('-')[1]);
+
+                e.checked && eAsset ? eAsset.classList.remove('hidden') : {};
+            });
+        }
+
+        function rememberFormValues() {
+            document.forms[0].name.value = sRegisterName;
+            document.forms[0].username.value = sRegisterUsername;
+        }
+
+        function storeFormValues() {
+            sessionStorage.setItem('register-name', document.forms[0].name.value);
+            sessionStorage.setItem('register-username', document.forms[0].username.value);
+        }
+
+        function checkScroll() {
+            let classes = [];
+
+            classes = document.body.scrollTop > 20 || document.documentElement.scrollTop > 20 ? ['invisible', 'visible'] : ['visible', 'invisible'];
+
+            eBtn.classList.replace(classes[0], classes[1]);
+        }
+
+        function scrollToTop() {
+            document.body.scroll({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
+            document.documentElement.scroll({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        window.addEventListener('load', () => {
+            if (eRadios && eAssets) checkSelectOptions();
+            if ((eRegisterName && sRegisterName) || (eRegisterUsername && sRegisterUsername)) rememberFormValues();
+            if (eBtn) checkScroll();
+        });
+        if (eMobiles && eMobileBorder && eMobileButton) window.addEventListener('resize', resetMobile);
+        if (eBtn) {
+            window.addEventListener('scroll', checkScroll);
+            window.addEventListener('touchmove', checkScroll);
+        }
+        if (eRadios && eAssets) window.addEventListener('input', checkSelectOptions);
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

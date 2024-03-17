@@ -1,7 +1,13 @@
-﻿namespace VideoGameTrading.Models {
-    public class AppUser {
-        public int AppUserId { get; set; }
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
-        public string Name { get; set; }
+namespace VideoGameTrading.Models
+{
+    public class AppUser : IdentityUser
+    {
+        public string? Name { get; set; }
+
+        [NotMapped]
+        public IList<string>? RoleNames { get; set; }
     }
 }

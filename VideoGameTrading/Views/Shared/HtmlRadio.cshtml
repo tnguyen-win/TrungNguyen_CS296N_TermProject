@@ -1,0 +1,6 @@
+<li class="flex justify-center">
+    <input id="radio-@Model.Id" class="eRadios select-none cursor-pointer" type="radio" name="radios" value="@Model.Id"
+    @(Model.Checked ? "checked=\"checked\"" : "")>
+    <label for="radio-@Model.Id"
+        class="text-white hover:text-[rgb(230,230,230)] select-none cursor-pointer ms-2 ">@Model.Body</label>
+</li>

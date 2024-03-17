@@ -1,32 +1,93 @@
 ﻿@{
-    ViewData["Title"] = "Home / Sitemap";
+    ViewBag.Title = "Home / Sitemap";
 }
 
-<div class="vh-100 container my-5">
-    <h6 class="display-6 fw-bold text-light mb-5">@ViewData["Title"]</h6>
-    <ul class="text-body-secondary">
+<div class="container m-auto lg:my-20 p-5">
+    <h1 class="text-4xl font-black mb-10">@ViewBag.Title</h1>
+    <ul class="list-inside">
         <li>
-            <span class="fw-bold text-light">Home</span>
-            <ul>
-                <li><span class="fw-bold text-light">Homepage:</span> Default landing page for site visitors.</li>
-                <li><span class="fw-bold text-light">Privacy:</span> Displays privacy disclaimers.</li>
-                <li><span class="fw-bold text-light">Sitemap:</span> Page that provides descriptions for each of the site's pages.</li>
+            <h3 class="text-2xl font-black mb-3">Home</h3>
+            <ul class="list-disc list-inside text-[rgb(75%,75%,75%)]">
+                <li>
+                    <code class="text-white">Homepage:</code> A default landing page for site visitors.
+                </li>
+                <li>
+                    <code class="text-white">Sitemap:</code> A place for site visitors to view descriptions for each of
+                    the accessible site pages.
+                <li>
+                    <code class="text-white">Privacy:</code> A place for site visitors to view privacy disclaimers
+                    surrounding used data.
+                </li>
             </ul>
         </li>
         <li>
-            <span class="fw-bold text-light">Shop</span>
-            <ul>
-                <li><span class="fw-bold text-light">Homepage:</span> Displays all products, search results, and search filters.</li>
-                <li><span class="fw-bold text-light">Product:</span> Allows the viewing of a single product.</li>
-                <li><span class="fw-bold text-light">Add:</span> Displays form fields to create a new product.</li>
-                <li><span class="fw-bold text-light">Card:</span> Product component.</li>
-                <li><span class="fw-bold text-light">Error:</span> 404 page for product related routes.</li>
+            <h3 class="text-2xl font-black mt-10 mb-3">Shop</h3>
+            <ul class="list-disc list-inside text-[rgb(75%,75%,75%)]">
+                <li>
+                    <code class="text-white">Homepage:</code> A place for site visitors to view existing products with
+                    or without applied filters.
+                </li>
+                <li>
+                    <code class="text-white">Create:</code> A place for authorized admin users to create a new product.
+                </li>
+                <li>
+                    <code class="text-white">Card:</code> Product component.
+                </li>
             </ul>
         </li>
         <li>
-            <span class="fw-bold text-light">Cart</span>
-            <ul>
-                <li><span class="fw-bold text-light">Homepage:</span> Displays a collection of products that have been saved to a virtual cart.</li>
+            <h3 class="text-2xl font-black mt-10 mb-3">Scaffolding (Shop Admin)</h3>
+            <ul class="list-disc list-inside text-[rgb(75%,75%,75%)]">
+                <li>
+                    <code class="text-white">Homepage:</code> A place for authorized admin users to: view all of the
+                    existing products; edit existing products; and delete existing products.
+                </li>
+                <li>
+                    <code class="text-white">Details:</code> A place for authorized admin users to view an individual
+                    existing product.
+                </li>
+                <li>
+                    <code class="text-white">Edit:</code> A place for authorized admin users to edit an individual
+                    existing product.
+                </li>
+                <li>
+                    <code class="text-white">Delete:</code> A place for authorized admin users to delete an individual
+                    existing product.
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h3 class="text-2xl font-black mt-10 mb-3">Cart</h3>
+            <ul class="list-disc list-inside text-[rgb(75%,75%,75%)]">
+                <li>
+                    <code class="text-white">Homepage:</code> A place for authorized users to view products that are
+                    placed in a virtual cart.
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h3 class="text-2xl font-black mt-10 mb-3">Admin (User)</h3>
+            <ul class="list-disc list-inside text-[rgb(75%,75%,75%)]">
+                <li>
+                    <code class="text-white">Homepage:</code> A place for authorized admin users to: create and delete
+                    users; add or remove users to an existing admin role; create or delete an admin role.
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h3 class="text-2xl font-black mt-10 mb-3">Account</h3>
+            <ul class="list-disc list-inside text-[rgb(75%,75%,75%)]">
+                <li>
+                    <code class="text-white">Register:</code> A place for site visitors to create new users.
+                </li>
+                <li>
+                    <code class="text-white">Login:</code> A place for site visitors to login to an existing authorized
+                    user.
+                </li>
+                <li>
+                    <code class="text-white">Access Denied:</code> A place for authorized users to be redirected to if
+                    they're attempting to access an admin-only, authorized page.
+                </li>
             </ul>
         </li>
     </ul>

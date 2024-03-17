@@ -1,47 +1,56 @@
 ﻿@model List<Item>
 @{
-    ViewData["Title"] = "Cart / Homepage";
+    ViewBag.Title = "Cart / Homepage";
     string products = "";
     double subTotal = 0.0d;
 }
 
-<div class="container my-5">
-    <h6 class="display-6 fw-bold text-light mb-5">@ViewData["Title"]</h6>
-    @if (@Model != null) {
-        if (@Model.Count > 0) {
+<div class="container m-auto lg:my-20 p-5">
+    <h1 class="text-4xl font-black mb-10">@ViewBag.Title</h1>
+    @if (Model != null)
+    {
+        if (Model.Count > 0)
+        {
             @* Products *@
-            <div class="row row-cols-1 row-cols-lg-3 g-4 container my-5">
-                @foreach (var item in Model) {
+            <ul class="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full my-5">
+                @foreach (var item in Model)
+                {
                     products += $"Product {item.ItemId} - ${item.Price.ToString()}\n\n";
                     products += item.Equals(Model.Last()) ? "====================" : "+\n\n";
-                    subTotal =  Math.Round(subTotal + item.Price, 2);
+                    subTotal = Math.Round(subTotal + item.Price, 2);
 
                     <partial name="~/views/shop/card.cshtml" model="new Item {
+                        ImageId = item.ImageId,
                         ItemId = item.ItemId,
                         InCart = item.InCart,
                         Title = item.Title,
                         Genre = item.Genre,
-                        ReleaseYear = @item.ReleaseYear,
-                        Price =  @item.Price,
-                        AgeRange = @item.AgeRange,
-                        Condition = @item.Condition,
-                        From = @item.From
+                        ReleaseYear = item.ReleaseYear,
+                        Price =  item.Price,
+                        AgeRange = item.AgeRange,
+                        Condition = item.Condition,
+                        From = item.From
                     }" />
                 }
-            </div>
+            </ul>
             @* Cart Calculations *@
-            <div class="d-flex flex-column">
-                <h6 class="display-6 fw-bold mb-5">Calculations</h6>
+            <div class="flex flex-col whitespace-pre">
+                <h3 class="text-2xl font-black mt-10 mb-3">Calculations</h3>
                 <p id="products">@products</p>
-                <big><big>Subtotal: <span class="fw-bold">$@subTotal</span></big></big>
+                <big class="mt-5"><big>Subtotal: <strong class="text-green-400">$@subTotal</strong></big></big>
             </div>
-        } else {
-            <p class="text-body-secondary m-0 p-0">
+        }
+        else
+        {
+            <div class="text-[rgb(75%,75%,75%)]">
                 There is nothing in your cart currently.
-                <ul>
-                    <li class="text-body-secondary">Set a product item's <span class="fw-bold text-light">InCart</span> property to a value of <span class="fw-bold text-light">true</span> to add it the cart.</li>
+                <ul class="list-disc list-inside">
+                    <li>
+                        Set a product item's <code class="text-white">InCart</code> property to
+                        a value of <code class="text-white">true</code> to add it the cart.
+                    </li>
                 </ul>
-            </p>
+            </div>
         }
     }
 </div>

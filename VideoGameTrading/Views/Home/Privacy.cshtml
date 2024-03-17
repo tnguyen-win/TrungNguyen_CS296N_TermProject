@@ -1,16 +1,21 @@
 ﻿@{
-    ViewData["Title"] = "Home / Privacy";
-    ViewData["Link_privacy"] = "https://azure.microsoft.com/en-us/explore/trusted-cloud/privacy";
+    ViewBag.Title = "Home - Privacy";
+    ViewBag.Link_privacy = "https://smarterasp.net/privacy";
+    ViewBag.Link_cookies = "https://smarterasp.net/cookies";
 }
 
-<div class="vh-100 container my-5">
-    <h6 class="display-6 fw-bold text-light mb-5">@ViewData["Title"]</h6>
-    <p class="text-body-secondary">
-        Online hosting disclaimer:
-        <ul>
-            <li>
-                <a class="text-warning link-warning" href=@ViewData["Link_privacy"]>@ViewData["Link_privacy"]</a>
-            </li>
-        </ul>
-    </p>
+<div class="container m-auto lg:my-20 p-5">
+    <h1 class="text-4xl font-black mb-10">@ViewBag.Title</h1>
+    <ul class="text-[rgb(75%,75%,75%)]">
+        <li class="mb-3">
+            [1]
+            <partial name="~/views/shared/htmllink.cshtml"
+                model='new HtmlLinkVM { URL=@ViewBag.Link_privacy.ToString(), Body=@ViewBag.Link_privacy.ToString() }' />
+        </li>
+        <li>
+            [2]
+            <partial name="~/views/shared/htmllink.cshtml"
+                model='new HtmlLinkVM { URL=@ViewBag.Link_cookies.ToString(), Body=@ViewBag.Link_cookies.ToString() }' />
+        </li>
+    </ul>
 </div>
