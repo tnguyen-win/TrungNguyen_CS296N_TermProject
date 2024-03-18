@@ -220,19 +220,6 @@ namespace VideoGameTrading.Controllers
         [Authorize]
         public async Task<IActionResult> Create(Item model)
         {
-            ShopLength shoplength = await _repository2.GetShopLengthByIdAsync(1);
-            CartLength cartlength = await _repository3.GetCartLengthByIdAsync(1);
-
-            shoplength.ShopTotal = _repository1.GetItems().Count;
-            cartlength.CartTotal = _repository1.GetItems()
-            .Where(m => m.InCart == true)
-            .ToList().Count;
-
-            _context.SaveChanges();
-
-            ViewBag.ShopLength = shoplength.ShopTotal;
-            ViewBag.CartLength = cartlength.CartTotal;
-
             Random rnd = new();
 
             // Fallbacks
